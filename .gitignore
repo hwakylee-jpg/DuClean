@@ -1,45 +1,46 @@
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
-.DS_Store
-.atom/
-.build/
-.buildlog/
-.history
-.svn/
-.swiftpm/
-migrate_working_dir/
+# Flutter build
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+pubspec.lock
+.dart_tool/
 
-# IntelliJ related
+# VSCode 설정
+.vscode/
+
+# Android 관련 빌드 파일
+android/.gradle/
+android/app/build/
 *.iml
-*.ipr
-*.iws
 .idea/
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
+# iOS 관련 빌드 파일
+ios/Pods/
+ios/Runner.xcworkspace/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/App.framework
+ios/Flutter/GeneratedPluginRegistrant.*
+ios/Flutter/ephemeral/
 
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
-.dart_tool/
-.flutter-plugins-dependencies
-.pub-cache/
-.pub/
-/build/
-/coverage/
+# Xcode 자동 생성 파일
+*.xcuserstate
+*.xcworkspace
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/xcuserdata/
 
-# Symbolication related
-app.*.symbols
+# Firebase 관련 비밀 파일
+*.keystore
+*.jks
 
-# Obfuscation related
-app.*.map.json
+# Mac OS 불필요 파일
+.DS_Store
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+# 기타 IDE 불필요 파일
+*.log
+*.tmp
+
+# 환경변수 파일 (직접 작성했을 경우)
+.env
