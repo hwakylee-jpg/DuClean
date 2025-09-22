@@ -1,13 +1,67 @@
+import 'package:duclean/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'dart:math';
 
 void main() {
   runApp(const MyApp());
 }
-// stless
+
+// 앱
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  @override
+  Widget build(BuildContext context) {
+    // 기본 설정, 테마, 메인화면
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'DuClean',
+      theme: ThemeData(
+        fontFamily: 'Pretendard',
+      ),
+      home: const MainPage(),
+    );
+  }
+}
+
+// 메인 화면
+class MainPage extends StatelessWidget {
+  const MainPage({super.key});
+
+  // 페이지 이동 함수
+  void navigateToPage(BuildContext context, String pageLabel) {
+    Widget page;  // 이동할 페이지
+
+    switch (pageLabel) {
+      case 'FAN TEST':
+        //page = const FanTestPage();
+        page = const SettingPage();
+        break;
+      case 'SOL TEST':
+        //page = const SolTestPage();
+        page = const SettingPage();
+        break;
+      case 'SETTING':
+        page = const SettingPage();
+        break;
+      case 'STATE':
+        //page = const StatePage();
+        page = const SettingPage();
+        break;
+      case 'INFO':
+        page = const SettingPage();
+        //page = const InfoPage();
+        break;
+      default:
+        page = Scaffold(
+          appBar: AppBar(title: const Text('Error')),
+          body: const Center(child: Text('Page not found!')),
+        );
+        break;
+    }
+    Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -19,17 +73,21 @@ class MyApp extends StatelessWidget {
     final List<Map<String, String>> buttonData = [
       {'icon': 'assets/images/fan.svg', 'label': 'FAN TEST'},
       {'icon': 'assets/images/valve.svg', 'label': 'SOL TEST'},
-      {'icon': 'assets/images/setting.svg', 'label': 'SETTING'},
+      {'icon': 'assets/images/handyman.svg', 'label': 'SETTING'},
       {'icon': 'assets/images/state.svg', 'label': 'STATE'},
       {'icon': 'assets/images/chat_info.svg', 'label': 'INFO'},
     ];
 
-    return MaterialApp(
-      title: 'DuClean',
-      theme: ThemeData(
-        fontFamily: 'Pretendard',
-      ),
-      home: Scaffold(
+    // 화면 크기
+    Size screenSize = MediaQuery.of(context).size;
+    var screenWidth = screenSize.width;
+    var screenHeight = screenSize.height;
+
+    // 버튼 크기
+    final double buttonWidth = (screenWidth * 0.4) > 350 ? 350 : (screenWidth * 0.4);
+    final double buttonHeight = (screenHeight * 0.3) > 262.5 ? 262.5 : (screenHeight * 0.3);
+
+    return Scaffold(
         backgroundColor: Color(0xfff6f6f6),
         // 상단 바
         appBar: AppBar(
@@ -52,17 +110,22 @@ class MyApp extends StatelessWidget {
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(30.0), // 화면 전체에 여백을 줍니다.
             child: Wrap(
-              spacing: 16.0,      // 버튼 사이의 가로 간격
-              runSpacing: 16.0,   // 버튼 사이의 세로 간격
+              spacing: 30,      // 버튼 사이의 가로 간격
+              runSpacing: 30,   // 버튼 사이의 세로 간격
               alignment: WrapAlignment.center, // 가운데 정렬
 
               children: [
                 // 1. START 버튼
                 SizedBox(
-                  width: 200,
-                  height: 150,
+                  width: buttonWidth,
+                  height: buttonHeight,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const SettingPage()),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: duBlue,
                       foregroundColor: Colors.white,
@@ -80,11 +143,12 @@ class MyApp extends StatelessWidget {
 
                 // 2. 나머지 아이콘 버튼들
                 ...buttonData.map((data) {
+                  final label = data['label']!;
                   return SizedBox(
-                    width: 200,
-                    height: 150,
+                    width: buttonWidth,
+                    height: buttonHeight,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => navigateToPage(context, label),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         foregroundColor: duBlue,
@@ -118,8 +182,6 @@ class MyApp extends StatelessWidget {
           height: 10,
           color: duBlue,
         )
-      )
     );
   }
 }
-
