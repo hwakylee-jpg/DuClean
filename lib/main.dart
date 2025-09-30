@@ -1,7 +1,7 @@
 import 'package:duclean/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'dart:math';
+//import 'dart:math';
 
 void main() {
   runApp(const MyApp());
@@ -173,7 +173,7 @@ class MainPage extends StatelessWidget {
                       ),
                     ),
                   );
-                }).toList(),
+                }),//.toList(),
               ],
             ),
           ),
